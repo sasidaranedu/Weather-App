@@ -1,12 +1,12 @@
 import clear from "./assets/icon/clear.png";
 import clouds from "./assets/icon/clouds.png";
 import drizzle from "./assets/icon/drizzle.png";
-import humidity from "./assets/icon/humidity.png";
+import humidityIcon from "./assets/icon/humidity.png";
 import mist from "./assets/icon/mist.png";
 import rain from "./assets/icon/rain.png";
 import snow from "./assets/icon/snow.png";
 import storm from "./assets/icon/storm.png";
-import windspeed from "./assets/icon/windspeed.png";
+import windspeedIcon from "./assets/icon/windspeed.png";
 
 import clearimg from "./assets/image/clear.jpg";
 import cloudsimg from "./assets/image/clouds.jpg";
@@ -167,52 +167,65 @@ const Weather = () => {
 };
 
 function Getweather(props) {
+  const {
+    icon,
+    iscityfound,
+    city,
+    country,
+    temp,
+    lon,
+    lat,
+    windspeed,
+    humidity,
+    weathertype,
+  } = props;
+
   return (
     <>
       <div className="weather-section">
         <div className="city">
           <i className="loc-icon fa-solid fa-location-dot"></i>
-          {props.iscityfound ? (
+          {iscityfound ? (
             <p>City Not Found</p>
           ) : (
             <p>
-              {props.city}, {props.country}
+              {city}, {country}
             </p>
           )}
         </div>
         <div className="temp-info">
-          <img src={props.icon} alt="cloud-icon" />
+          <img src={icon} alt="cloud-icon" />
 
           <div className="temperature">
             <div className="celsius-detail">
-              {props.temp}
+              {temp}
               <span>°</span>C
             </div>
-            <div className="weather-detail">{props.weathertype}</div>
+            <div className="weather-detail">{weathertype}</div>
           </div>
         </div>
         <div className="coord ">
           <div className="log">
-            <h3>{props.lon}</h3>
+            <h3>{lon}</h3>
             <span className="coord-name">Longitude</span>
           </div>
           <div className="lat">
-            <h3>{props.lat}</h3>
+            <h3>{lat}</h3>
             <span className="coord-name">Latitude</span>
           </div>
         </div>
         <div className="weather-elements">
           <div className="windspeed element">
             <div>
-              <img src={windspeed} alt="windspeed" />
-              <span>{props.windspeed}Km/h</span>
+              <img src={windspeedIcon} alt="windspeed" />
+              <span>{windspeed}Km/h</span>
             </div>
             <p>Wind Speed</p>
           </div>
           <div className="humidity element">
             <div>
-              <img src={humidity} alt="humidity" />
-              <span>{props.humidity}%</span>
+              <img src={humidityIcon} alt="humidity" />
+              <span>{humidity}%</span>
             </div>
             <p>Humidity</p>
           </div>
