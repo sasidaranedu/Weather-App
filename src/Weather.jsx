@@ -1,3 +1,6 @@
+import { useState } from "react";
+import PropTypes from "prop-types";
+
 import clear from "./assets/icon/clear.png";
 import clouds from "./assets/icon/clouds.png";
 import drizzle from "./assets/icon/drizzle.png";
@@ -14,8 +17,6 @@ import mistimg from "./assets/image/mist.png";
 import rainimg from "./assets/image/rain.jpg";
 import snowimg from "./assets/image/snow.jpg";
 import stormimg from "./assets/image/storm.jpg";
-
-import { useState } from "react";
 
 const Weather = () => {
   const [background, setBackground] = useState(snowimg);
@@ -100,7 +101,7 @@ const Weather = () => {
       setLon(data.coord.lon);
       setLat(data.coord.lat);
       setHumidity(data.main.humidity);
-      setWindspeed((data.wind.speed * 3.6).toFixed(2));
+      setWindspeed(Number(data.wind.speed * 3.6).toFixed(2));
       setCountry(data.sys.country);
 
       const weatherIconCode = data.weather[0].icon;
@@ -155,7 +156,7 @@ const Weather = () => {
               temp={temp}
               lon={lon}
               lat={lat}
-              windspeed={windspeed}
+              windspeed={parseFloat(windspeed)}
               humidity={humidity}
               weathertype={weatherType}
             />
@@ -234,5 +235,18 @@ function Getweather(props) {
     </>
   );
 }
+
+Getweather.propTypes = {
+  city: PropTypes.string.isRequired,
+  country: PropTypes.string.isRequired,
+  humidity: PropTypes.number.isRequired,
+  icon: PropTypes.string.isRequired,
+  iscityfound: PropTypes.bool.isRequired,
+  lon: PropTypes.number.isRequired,
+  lat: PropTypes.number.isRequired,
+  temp: PropTypes.number.isRequired,
+  windspeed: PropTypes.number.isRequired,
+  weathertype: PropTypes.string.isRequired,
+};
 
 export default Weather;
